@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  referencedb:
+    container_name: referencedb
+    restart:  always
+    ports:
+     - "27017:27017"
+    volumes:
+        - mongo_data:/data/db
+
+
+  reference.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://referencedb:27017"
+    depends_on:
+      - referencedb
+    ports:
+      - "8000:80"
+
