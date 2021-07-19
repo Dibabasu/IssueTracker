@@ -1,6 +1,8 @@
-﻿using MongoDB.Driver;
-using Reference.API.Data;
+﻿using AutoMapper;
+using MongoDB.Bson;
 using Reference.API.Entities;
+using Reference.API.Model;
+using Reference.API.Repositories.Data;
 using Reference.API.Repositories.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,62 +11,57 @@ namespace Reference.API.Repositories.Service
 {
     public class ComponentRepository : IComponentRepository
     {
-        private readonly IReferenceContext _context;
-        public ComponentRepository(IReferenceContext context)
+        private readonly IMongoRepository<Component> _context;
+        private readonly IMapper _mapper;
+        public ComponentRepository(IMongoRepository<Component> context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
+
         }
-        public async Task CreateComponent(Component component)
+        public async Task CreateComponent(ComponentModel component)
         {
-           await _context.Components.InsertOneAsync(component);
+           
+            await _context.InsertOneAsync(_mapper.Map<Component>(component));
         }
 
         public async Task<bool> DeleteComponent(string id)
         {
-            FilterDefinition<Component> filter = Builders<Component>.Filter.Eq(p => p.Id, id);
-
-            DeleteResult deleteResult = await _context
-                .Components
-                .DeleteOneAsync(filter);
-
-            return deleteResult.IsAcknowledged
-                && deleteResult.DeletedCount > 0;
+            return await _context.DeleteByIdAsync(ObjectId.Parse(id));
         }
 
-        public async Task<Component> GetComponent(string id)
+        public async Task<ComponentModel> GetComponent(string id)
         {
-            return await _context
-                .Components
-                .Find(p => p.Id == id)
-                .FirstOrDefaultAsync();
+            var result = await _context
+                .FindByIdAsync(id);
+
+            return _mapper.Map<ComponentModel>(result);
+
         }
 
-        public async Task<IEnumerable<Component>> GetComponentByName(string name)
+        public async Task<IEnumerable<ComponentModel>> GetComponentByName(string name)
         {
-            FilterDefinition<Component> filter = Builders<Component>.Filter.Eq(p => p.Name, name);
 
-            return await _context
-                 .Components
-                 .Find(filter)
-                 .ToListAsync();
+            var result = await _context
+                .FilterBy(r => r.Name == name);
+
+            return _mapper.Map<IEnumerable<ComponentModel>>(result);
+
         }
 
-        public async Task<IEnumerable<Component>> GetComponents()
+        public async Task<IEnumerable<ComponentModel>> GetComponents()
         {
-            return await _context
-                 .Components
-                 .Find(p => true)
-                 .ToListAsync();
+            var result = await _context
+                 .FilterBy(r => true);
+
+            return _mapper.Map<IEnumerable<ComponentModel>>(result);
+
         }
 
-        public async Task<bool> UpdateComponent(Component component)
+        public async Task<bool> UpdateComponent(ComponentModel component)
         {
-            var updateResult = await _context
-                .Components
-                .ReplaceOneAsync(filter: g => g.Id == component.Id, replacement: component);
 
-            return updateResult.IsAcknowledged
-                && updateResult.ModifiedCount > 0;
+            return await _context.ReplaceOneAsync(_mapper.Map<Component>(component));
         }
     }
 }

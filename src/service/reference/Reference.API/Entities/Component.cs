@@ -1,13 +1,13 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Reference.API.Common;
 
 namespace Reference.API.Entities
 {
-    public class Component
+    [BsonCollection("component")]
+    public class Component : Document
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+
         [BsonElement("Name")]
         public string Name { get; set; }
     }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Reference.API.Entities;
+using Reference.API.Model;
 using Reference.API.Repositories.Interface;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,8 @@ namespace Reference.API.Controllers
             _logger = logger;
         }
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Location>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
+        [ProducesResponseType(typeof(IEnumerable<LocationModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<LocationModel>>> GetLocations()
         {
             var Locations = await _repository.GetLocations();
             return Ok(Locations);
@@ -32,8 +33,8 @@ namespace Reference.API.Controllers
 
         [HttpGet("{id:length(24)}", Name = "GetLocation")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(Location), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Location>> GetLocationById(string id)
+        [ProducesResponseType(typeof(LocationModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<LocationModel>> GetLocationById(string id)
         {
             var Location = await _repository.GetLocation(id);
             if (Location == null)
@@ -43,25 +44,53 @@ namespace Reference.API.Controllers
             }
             return Ok(Location);
         }
+        [HttpGet("{name}", Name = "GetLocationByName")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(LocationModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<LocationModel>>> GetLocationByName(string name)
+        {
+            var Location = await _repository.GetLocationByName(name);
+            if (Location == null)
+            {
+                _logger.LogError($"Location with id: {name}, not found.");
+                return NotFound();
+            }
+            return Ok(Location);
+        }
+
+        [HttpGet("{type}", Name = "GetLocationByType")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(LocationModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<LocationModel>>> GetLocationByType(string type)
+        {
+            var Location = await _repository.GetLocationByType(type);
+            if (Location == null)
+            {
+                _logger.LogError($"Location with id: {type}, not found.");
+                return NotFound();
+            }
+            return Ok(Location);
+        }
+
 
         [HttpPost]
-        [ProducesResponseType(typeof(Location), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Location>> CreateLocation([FromBody] Location Location)
+        [ProducesResponseType(typeof(LocationModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<LocationModel>> CreateLocation([FromBody] LocationModel location)
         {
-            await _repository.CreateLocation(Location);
+            await _repository.CreateLocation(location);
 
-            return CreatedAtRoute("GetLocation", new { id = Location.Id }, Location);
+            return CreatedAtRoute("GetLocation", new { id = location.Id }, location);
         }
 
         [HttpPut]
-        [ProducesResponseType(typeof(Location), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UpdateLocation([FromBody] Location Location)
+        [ProducesResponseType(typeof(LocationModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateLocation([FromBody] LocationModel Location)
         {
             return Ok(await _repository.UpdateLocation(Location));
         }
 
         [HttpDelete("{id:length(24)}", Name = "DeleteLocation")]
-        [ProducesResponseType(typeof(Location), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(LocationModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteLocationById(string id)
         {
             return Ok(await _repository.DeleteLocation(id));

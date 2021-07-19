@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Reference.API.Entities;
+using Reference.API.Model;
 using Reference.API.Repositories;
 using Reference.API.Repositories.Interface;
 using System;
@@ -23,17 +24,18 @@ namespace Reference.API.Controllers
             _logger = logger;
         }
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Component>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<Component>>> GetComponents()
+        [ProducesResponseType(typeof(IEnumerable<ComponentModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<ComponentModel>>> GetComponents()
         {
             var Components = await _repository.GetComponents();
+
             return Ok(Components);
         }
 
         [HttpGet("{id:length(24)}", Name = "GetComponent")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(Component), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Component>> GetComponentById(string id)
+        [ProducesResponseType(typeof(ComponentModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ComponentModel>> GetComponentById(string id)
         {
             var Component = await _repository.GetComponent(id);
             if (Component == null)
@@ -41,27 +43,42 @@ namespace Reference.API.Controllers
                 _logger.LogError($"Component with id: {id}, not found.");
                 return NotFound();
             }
+
             return Ok(Component);
         }
-       
+
+        [HttpGet("{name}", Name = "GetComponentByName")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(LocationModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<ComponentModel>>> GetComponentByName(string name)
+        {
+            var Location = await _repository.GetComponentByName(name);
+            if (Location == null)
+            {
+                _logger.LogError($"Component with id: {name}, not found.");
+                return NotFound();
+            }
+            return Ok(Location);
+        }
+
         [HttpPost]
-        [ProducesResponseType(typeof(Component), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Component>> CreateComponent([FromBody] Component Component)
+        [ProducesResponseType(typeof(ComponentModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ComponentModel>> CreateComponent([FromBody] ComponentModel Component)
         {
             await _repository.CreateComponent(Component);
 
-            return CreatedAtRoute("GetComponent", new { id = Component.Id }, Component);
+            return CreatedAtRoute("GetComponent", new { id = Component.Id.ToString() }, Component);
         }
 
         [HttpPut]
-        [ProducesResponseType(typeof(Component), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UpdateComponent([FromBody] Component Component)
+        [ProducesResponseType(typeof(ComponentModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateComponent([FromBody] ComponentModel Component)
         {
             return Ok(await _repository.UpdateComponent(Component));
         }
 
         [HttpDelete("{id:length(24)}", Name = "DeleteComponent")]
-        [ProducesResponseType(typeof(Component), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ComponentModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteComponentById(string id)
         {
             return Ok(await _repository.DeleteComponent(id));
