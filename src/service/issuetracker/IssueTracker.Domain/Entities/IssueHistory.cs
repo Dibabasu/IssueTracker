@@ -7,5 +7,9 @@ namespace IssueTracker.Domain.Entities
         public string TicketNumber { get; set; }
         public string Comment { get; set; }
         public string Status { get; set; }
+
+        public IssueDetail IssueDetail { get; set; }
+
+        public int IssueDetailId { get; set; }
     }
 }

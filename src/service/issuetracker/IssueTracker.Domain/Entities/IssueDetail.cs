@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using IssueTracker.Domain.Common;
 using IssueTracker.Domain.Enums;
 
@@ -19,6 +20,10 @@ namespace IssueTracker.Domain.Entities
         public DateTime? ClosedAt { get; set; }
         public string ClosedBy { get; set; }
         public string ClosingRemarks { get; set; }
+
+        public IList<IssueHistory> History { get; private set; } = new List<IssueHistory>();
+
+        public IList<IssueFileUpload> FileUpload { get; private set; } = new List<IssueFileUpload>();
 
 
     }
