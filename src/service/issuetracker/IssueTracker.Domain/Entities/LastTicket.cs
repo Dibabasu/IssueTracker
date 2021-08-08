@@ -3,7 +3,7 @@ namespace IssueTracker.Domain.Entities
     public class LastTicket
     {
         public int Id { get; set; }
-        public string Year { get; set; }
-        public string LastTicketNo { get; set; }
+        public int Year { get; set; }
+        public int LastTicketNumber { get; set; }
     }
 }

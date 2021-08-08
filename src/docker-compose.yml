@@ -3,6 +3,8 @@ version: '3.4'
 services:
   referencedb:
     image: mongo
+  issuetrackerdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
 
   reference.api:
     image: ${DOCKER_REGISTRY-}referenceapi

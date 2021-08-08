@@ -11,17 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reference.API", "service\re
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{96D5747F-CB72-4023-9C35-17B674810890}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{19CFD4C6-0EA3-45E4-8149-E3F906DB80CC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "issuetracker", "issuetracker", "{527E7341-D424-47E3-BA7C-B45715012524}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IssueTracker.API", "service\issuetracker\IssueTracker.API\IssueTracker.API.csproj", "{D1E48388-378D-40EF-9F63-353A76D43F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.API", "service\issuetracker\IssueTracker.API\IssueTracker.API.csproj", "{D1E48388-378D-40EF-9F63-353A76D43F57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IssueTracker.Application", "service\issuetracker\IssueTracker.Application\IssueTracker.Application.csproj", "{69F3485C-C21E-4058-937C-5FA2CF664B76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Application", "service\issuetracker\IssueTracker.Application\IssueTracker.Application.csproj", "{69F3485C-C21E-4058-937C-5FA2CF664B76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IssueTracker.Domain", "service\issuetracker\IssueTracker.Domain\IssueTracker.Domain.csproj", "{341CC04B-B0E0-4220-8745-B85DA45746DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Domain", "service\issuetracker\IssueTracker.Domain\IssueTracker.Domain.csproj", "{341CC04B-B0E0-4220-8745-B85DA45746DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IssueTracker.Infrastructure", "service\issuetracker\IssueTracker.Infrastructure\IssueTracker.Infrastructure.csproj", "{A11C4A08-97D5-45E7-A08D-FE83477C678C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Infrastructure", "service\issuetracker\IssueTracker.Infrastructure\IssueTracker.Infrastructure.csproj", "{A11C4A08-97D5-45E7-A08D-FE83477C678C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,7 +58,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{28D2FDCC-840D-4E74-B56E-C379CACC9414} = {A401B50A-08D8-4BFA-AA51-E7D52FD368FF}
 		{D440DB36-94A3-4EE1-8F3B-C8122F561F9D} = {28D2FDCC-840D-4E74-B56E-C379CACC9414}
-		{527E7341-D424-47E3-BA7C-B45715012524} = {19CFD4C6-0EA3-45E4-8149-E3F906DB80CC}
+		{527E7341-D424-47E3-BA7C-B45715012524} = {A401B50A-08D8-4BFA-AA51-E7D52FD368FF}
 		{D1E48388-378D-40EF-9F63-353A76D43F57} = {527E7341-D424-47E3-BA7C-B45715012524}
 		{69F3485C-C21E-4058-937C-5FA2CF664B76} = {527E7341-D424-47E3-BA7C-B45715012524}
 		{341CC04B-B0E0-4220-8745-B85DA45746DD} = {527E7341-D424-47E3-BA7C-B45715012524}
