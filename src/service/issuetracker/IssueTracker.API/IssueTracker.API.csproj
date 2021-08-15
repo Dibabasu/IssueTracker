@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Dockerfile" />
+    <ProjectReference Include="..\IssueTracker.Application\IssueTracker.Application.csproj" />
+    <ProjectReference Include="..\IssueTracker.Infrastructure\IssueTracker.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,12 +17,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\IssueTracker.Application\IssueTracker.Application.csproj" />
-    <ProjectReference Include="..\IssueTracker.Infrastructure\IssueTracker.Infrastructure.csproj" />
-  </ItemGroup>
+ 
 
 </Project>

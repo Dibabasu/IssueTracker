@@ -3,6 +3,7 @@ version: '3.4'
 services:
   referencedb:
     image: mongo
+
   issuetrackerdb:
     image: mcr.microsoft.com/mssql/server:2017-latest
 
@@ -11,5 +12,11 @@ services:
     build:
       context: .
       dockerfile: service/reference/Reference.API/Dockerfile
+
+  issuetracker.api:
+    image: ${DOCKER_REGISTRY-}issuetrackerapi
+    build:
+      context: .
+      dockerfile: service/issuetracker/IssueTracker.API/Dockerfile
 volumes:
   mongo_data:
