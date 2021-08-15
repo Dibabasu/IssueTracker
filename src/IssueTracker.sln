@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Domain", "serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Infrastructure", "service\issuetracker\IssueTracker.Infrastructure\IssueTracker.Infrastructure.csproj", "{A11C4A08-97D5-45E7-A08D-FE83477C678C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{61BFC0AA-4E5D-4CDC-B0AE-42E67C7A2044}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
