@@ -10,6 +10,7 @@ namespace issueTracker.API
         {
             CreateHostBuilder(args)
                  .Build()
+
                  .Run();
         }
 
