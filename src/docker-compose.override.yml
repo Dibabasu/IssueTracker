@@ -12,8 +12,8 @@ services:
   issuetrackerdb:
     container_name: issuetrackerdb
     environment:
-        SA_PASSWORD: "SwN12345678"
-        ACCEPT_EULA: "Y"
+        SA_PASSWORD: 'SwN12345678'
+        ACCEPT_EULA: 'Y'
     restart: always
     ports:
         - "1433:1433"
@@ -27,4 +27,13 @@ services:
       - referencedb
     ports:
       - "8000:80"
+
+  issuetracker.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=issuetrackerdb;Database=issuetracker;User Id=sa;Password=SwN12345678"
+    depends_on:
+      - issuetrackerdb
+    ports:
+      - "8004:80"
 
