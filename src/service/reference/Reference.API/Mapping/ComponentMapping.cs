@@ -20,6 +20,9 @@ namespace Reference.API.Mapping
             CreateMap<ComponentModel, Component>()
                .ForMember(u => u.Name, opt => opt.MapFrom(x => x.ComponentName))
                .ForMember(u => u.Id, opt => opt.MapFrom(x => ObjectId.Parse(x.Id)));
+
+            CreateMap<CreateComponentDTO,Component>()
+                .ForMember(u => u.Name, opt => opt.MapFrom(x => x.ComponentName));
         }
     }
 }

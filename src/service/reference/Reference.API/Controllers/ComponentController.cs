@@ -63,11 +63,11 @@ namespace Reference.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ComponentModel), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ComponentModel>> CreateComponent([FromBody] ComponentModel Component)
+        public async Task<ActionResult<ComponentModel>> CreateComponent([FromBody] CreateComponentDTO Component)
         {
             await _repository.CreateComponent(Component);
 
-            return CreatedAtRoute("GetComponent", new { id = Component.Id.ToString() }, Component);
+            return Ok();
         }
 
         [HttpPut]

@@ -10,7 +10,7 @@ namespace Reference.API.Repositories.Interface
         Task<IEnumerable<ComponentModel>> GetComponents();
         Task<ComponentModel> GetComponent(string id);
         Task<IEnumerable<ComponentModel>> GetComponentByName(string name);
-        Task CreateComponent(ComponentModel component);
+        Task CreateComponent(CreateComponentDTO component);
         Task<bool> UpdateComponent(ComponentModel component);
         Task<bool> DeleteComponent(string id);
     }

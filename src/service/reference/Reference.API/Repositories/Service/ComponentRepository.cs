@@ -19,7 +19,7 @@ namespace Reference.API.Repositories.Service
             _mapper = mapper;
 
         }
-        public async Task CreateComponent(ComponentModel component)
+        public async Task CreateComponent(CreateComponentDTO component)
         {
            
             await _context.InsertOneAsync(_mapper.Map<Component>(component));
