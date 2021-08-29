@@ -1,7 +1,7 @@
 ﻿using LoggingService.CustomExceptionMiddleware;
 using Microsoft.AspNetCore.Builder;
 
-namespace Reference.API.Extensions
+namespace IssueTracker.API.Extenstion
 {
     public static class ExceptionMiddlewareExtensions
     {

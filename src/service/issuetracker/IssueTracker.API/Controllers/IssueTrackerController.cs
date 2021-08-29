@@ -33,14 +33,10 @@ namespace IssueTracker.API.Controllers
             return await _createIssueService.CreateIssueDetailsAsync(command);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, UpdateIssueDetailCommand command)
+        [HttpPut]
+        public async Task<ActionResult> Update( UpdateIssueDetailCommand command)
         {
-            if (id != command.Id)
-            {
-                return BadRequest();
-            }
-
+          
             await Mediator.Send(command);
 
             return NoContent();

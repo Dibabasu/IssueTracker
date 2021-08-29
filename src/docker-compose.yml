@@ -18,5 +18,12 @@ services:
     build:
       context: .
       dockerfile: service/issuetracker/IssueTracker.API/Dockerfile
+
+  ocelotapigateway:
+    image: ${DOCKER_REGISTRY-}ocelotapigateway
+    build:
+      context: .
+      dockerfile: apigateways/OcelotApiGateWay/Dockerfile
+
 volumes:
   mongo_data:

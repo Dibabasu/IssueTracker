@@ -5,8 +5,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8000"
+          "Host": "reference_api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Component",
@@ -24,8 +24,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8000"
+          "Host": "reference_api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Component/{id}",
@@ -39,8 +39,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8000"
+          "Host": "reference_api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Component/{name}",
@@ -53,8 +53,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8000"
+          "Host": "reference_api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Location",
@@ -68,12 +68,12 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/v1/Location/{id}",
+      "DownstreamPathTemplate": "/api/Location/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8000"
+          "Host": "reference_api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Location/{id}",
@@ -87,8 +87,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8000"
+          "Host": "reference_api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Location/{name}",
@@ -98,17 +98,19 @@
     },
 
     {
-      "DownstreamPathTemplate": "/api/v1/Order/{userName}",
+      "DownstreamPathTemplate": "/api/IssueTracker",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8004"
+          "Host": "issuetracker_api",
+          "Port": "80"
         }
       ],
-      "UpstreamPathTemplate": "/Order/{userName}",
+      "UpstreamPathTemplate": "/IssueTracker",
       "UpstreamHttpMethod": [
-        "GET"
+        "GET",
+        "POST",
+        "PUT"
       ]
     }
   ],

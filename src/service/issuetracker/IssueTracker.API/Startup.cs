@@ -1,3 +1,4 @@
+using IssueTracker.API.Extenstion;
 using IssueTracker.Application;
 using IssueTracker.Infrastructure;
 using IssueTracker.Infrastructure.Persistence;
@@ -49,6 +50,8 @@ namespace issueTracker.API
             }
 
             dataset.Database.Migrate();
+
+
             app.UseRouting();
 
             app.UseCors(x => x
@@ -58,6 +61,8 @@ namespace issueTracker.API
                .AllowCredentials()); // allow credentials
 
             app.UseAuthorization();
+
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

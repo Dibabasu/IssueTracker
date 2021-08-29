@@ -20,6 +20,7 @@ services:
 
 
   reference.api:
+    container_name: reference_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=mongodb://referencedb:27017"
@@ -29,6 +30,7 @@ services:
       - "8000:80"
 
   issuetracker.api:
+    container_name: issuetracker_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:DefaultConnection=Server=issuetrackerdb;Database=issuetracker;User Id=sa;Password=SwN12345678"
@@ -36,4 +38,15 @@ services:
       - issuetrackerdb
     ports:
       - "8004:80"
+
+
+  ocelotapigateway:
+    container_name: ocelotapigw
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+        - issuetracker.api
+        - reference.api
+    ports:
+      - "8010:80"
 
