@@ -79,7 +79,7 @@ namespace Reference.API.Controllers
         {
             await _repository.CreateLocation(location);
 
-            return CreatedAtRoute("GetLocation", new { id = location.Id }, location);
+            return Ok();
         }
 
         [HttpPut]

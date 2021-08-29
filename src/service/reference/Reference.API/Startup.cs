@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Reference.API.Extensions;
 using Reference.API.Repositories.Data;
 using Reference.API.Repositories.Interface;
 using Reference.API.Repositories.Service;
@@ -48,7 +49,7 @@ namespace Reference.API
             }
 
             app.UseRouting();
-
+            app.ConfigureCustomExceptionMiddleware();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

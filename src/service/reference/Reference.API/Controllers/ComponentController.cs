@@ -27,6 +27,7 @@ namespace Reference.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<ComponentModel>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<ComponentModel>>> GetComponents()
         {
+            
             var Components = await _repository.GetComponents();
 
             return Ok(Components);
